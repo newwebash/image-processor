@@ -1,3 +1,7 @@
-let greeting = 'hello!';
+const sendGreeting = (name: string) => {
+    console.log(`Hello ${name}!`);
 
-console.log(greeting);
+    return `Hello ${name}!`;
+};
+
+export default sendGreeting;
