@@ -1,12 +1,9 @@
-import sendGreeting from '../index';
 import request from 'supertest';
 import app from '../app';
 
-it('expect greeting to return "Hello Ashley!"', () => {
-    expect(sendGreeting('Ashley')).toEqual('Hello Ashley!');
-});
+/**Example endpoint test */
 
-describe('GET /api', () => {
+describe('Example API endpoint test -- GET /api', () => {
     it('returns status 200', async () => {
         const res = await request(app).get('/api');
 
