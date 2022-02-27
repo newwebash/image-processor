@@ -10,10 +10,10 @@ describe('Example API endpoint test -- GET /api', () => {
         expect(res.statusCode).toEqual(200);
     });
 
-    it('returns status 404', async () => {
+    it('returns status 404 when passing an unknown param', async () => {
         const res = await request(app)
             .post('/api')
-            .send({ exampeParam: 'a string' });
+            .send({ exampleParam: 'a string' });
 
         expect(res.statusCode).toEqual(404);
     });
