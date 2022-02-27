@@ -3,20 +3,28 @@ import sharp from 'sharp';
 const resizeImage = express.Router();
 const preProcessedPath = './application/pre_processed/'
 const processedPath = './application/processed/'
-const img = 'fjord.jpg'
-const resizedImg = `${processedPath}fjord-resized.jpg`
+//const img = 'fjord.jpg'
+//const resizedImg = `${processedPath}fjord-resized.jpg`
 
 
 resizeImage.get('/', (req, res) => {
     const resizeImage = async () => {
+      if (req.query.filename == null) {
+        res.status(400)
+        res.send("Error: no filename provided")
+        return
+      }
+      const img = req.query.filename as string
+      console.log("🚀 ~ file: resizeImage.ts ~ line 18 ~ resizeImage ~ typeof img", typeof img)
+      const resizedImg = img.replace('.', '-resized.')
         try {
           await sharp(`${preProcessedPath}${img}`)
             .resize({
               width: 200,
               height: 200
             })
-            .toFile(resizedImg)
-            res.sendFile('fjord-resized.jpg', {root: processedPath})
+            .toFile(`${processedPath}${resizedImg}`)
+            res.sendFile(resizedImg , {root: processedPath})
             console.log("done resizing");
         } catch (error) {
           console.log(`An error occurred during processing: ${error}`);
