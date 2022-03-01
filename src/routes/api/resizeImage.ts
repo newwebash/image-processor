@@ -35,9 +35,7 @@ resizeImage.get('/', (req, res) => {
         );
 
         // check if resized image already exists - if not, create it
-        const doesFileExist = checkIfFileExists(
-            resizedImgName
-        );
+        const doesFileExist = checkIfFileExists(resizedImgName);
         if (!doesFileExist) {
             resizedImgName = await processImg(img, desiredWidth, desiredHeight);
         }

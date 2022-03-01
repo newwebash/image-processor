@@ -8,8 +8,8 @@ const incorrectImg = 'nonexistent.jpg';
 
 describe('checkIfFileExists', () => {
     beforeAll(async () => {
-        correctImg = await processImg(imgToProcess, testWidth, testHeight);        
-    })
+        correctImg = await processImg(imgToProcess, testWidth, testHeight);
+    });
     it('returns true if the file exits', () => {
         expect(checkIfFileExists(correctImg)).toEqual(true);
     });
