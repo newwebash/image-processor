@@ -3,8 +3,8 @@
 The Image Processor allows you to resize an image of any size to
 view in your browser, or to download a library of resized thumbnails.
 
-This application was written in Node, Express, and Typescript, and tested
-with Jasmine and Supertest by @newwebash.
+This application was written in Node, Express, Sharp, and Typescript, 
+and tested with Jasmine and Supertest by @newwebash.
 
 
 ## How to use
@@ -72,3 +72,13 @@ Start the local server
 ```
 npm run start
 ```
+
+## Attributions
+
+To help inform how to code this project, I gathered information
+from the following resources:
+
+* Udacity course content
+* Documentation for node modules used
+* [How To Process Images in Node.js With Sharp](https://www.digitalocean.com/community/tutorials/how-to-process-images-in-node-js-with-sharp) 
+  article from Digital Ocean.
