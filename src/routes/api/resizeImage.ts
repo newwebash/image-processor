@@ -1,4 +1,5 @@
 import express from 'express';
+import checkIfFileExists from '../../functions/checkIfFileExists';
 import processImg from '../../functions/processImg';
 const resizeImage = express.Router();
 const processedPath = './application/processed/';
@@ -23,12 +24,25 @@ resizeImage.get('/', (req, res) => {
             );
             return;
         }
+
+        // get image details from request
         const img = req.query.filename as string;
         const desiredWidth: number = parseInt(req.query.width as string);
         const desiredHeight: number = parseInt(req.query.height as string);
+        let resizedImgName = img.replace(
+            '.',
+            `-${desiredWidth}-${desiredHeight}.`
+        );
 
-        const response = await processImg(img, desiredWidth, desiredHeight);
-        res.sendFile(response, { root: processedPath });
+        // check if resized image already exists - if not, create it
+        const doesFileExist = checkIfFileExists(
+            resizedImgName
+        );
+        if (!doesFileExist) {
+            resizedImgName = await processImg(img, desiredWidth, desiredHeight);
+        }
+
+        res.sendFile(resizedImgName, { root: processedPath });
     };
 
     resizeImage();
