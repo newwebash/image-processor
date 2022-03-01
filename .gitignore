@@ -1,5 +1,4 @@
 node_modules/*
 build/*
-application/processed
 
 package-lock.json
