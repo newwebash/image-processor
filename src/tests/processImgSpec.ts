@@ -32,7 +32,7 @@ describe('processImg', () => {
                 expect(metadata.height).toEqual(testHeight);
                 expect(metadata.width).toEqual(testWidth);
             } catch (error) {
-                console.log(error);
+                return error;
             }
         };
         getImgSize();

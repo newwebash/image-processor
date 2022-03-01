@@ -20,7 +20,6 @@ const processImg = async (
             .toFile(`${processedPath}${resizedImg}`);
         return `${resizedImg}`;
     } catch (error) {
-        console.log(error);
         return `Error while processing ${originalImg}: ${error}`;
     }
 };

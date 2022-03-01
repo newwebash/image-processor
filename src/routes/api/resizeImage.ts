@@ -14,7 +14,7 @@ const processedPath = './application/processed/';
  * @param width required number - desired image width in pixels
  * @param height required number - desired image height in pixels
  */
-resizeImage.get('/', (req, res) => {
+resizeImage.get('/', (req: express.Request, res: express.Response):void => {
     const resizeImage = async () => {
         // validate that all required params were passed
         if (!req.query.filename || !req.query.width || !req.query.height) {
