@@ -10,11 +10,11 @@ const processedPath = './application/processed/';
  * Image is also placed in application/processed folder.
  * @param filename required string - full filename including
  * extension of a file placed in the application/pre_processed
- * folder.
+ * folder. Currently only .jpg and .png are supported.
  * @param width required number - desired image width in pixels
  * @param height required number - desired image height in pixels
  */
-resizeImage.get('/', (req: express.Request, res: express.Response):void => {
+resizeImage.get('/', (req: express.Request, res: express.Response): void => {
     const resizeImage = async () => {
         // validate that all required params were passed
         if (!req.query.filename || !req.query.width || !req.query.height) {
@@ -25,8 +25,35 @@ resizeImage.get('/', (req: express.Request, res: express.Response):void => {
             return;
         }
 
-        // get image details from request
+        // validate that filename param format is correct
         const img = req.query.filename as string;
+        const fileType = img.split('.').pop();
+        const isCorrectFormat = fileType === 'jpg' || fileType === 'png';
+
+        // Return error if incorrect
+        if (!isCorrectFormat) {
+            res.status(400);
+            res.send(
+                'Error: invalid file format. Try again with JPG or PNG image.'
+            );
+            return;
+        }
+
+        // validate that size input params are correct
+        const isCorrectDimensionType =
+            parseInt(req.query.width as string) !== NaN &&
+            parseInt(req.query.height as string) !== NaN;
+
+        // Return error if either are incorrect
+        if (!isCorrectDimensionType) {
+            res.status(400);
+            res.send(
+                'Error: invalid data type provided for image size. Numbers are supported only.'
+            );
+            return;
+        }
+
+        // get image details from request
         const desiredWidth: number = parseInt(req.query.width as string);
         const desiredHeight: number = parseInt(req.query.height as string);
         let resizedImgName = img.replace(
